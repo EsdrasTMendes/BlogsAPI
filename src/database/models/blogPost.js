@@ -12,7 +12,7 @@ const BlogPost = (sequelize, DataTypes) => {
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   }, {
-    timestamp: false,
+    timestamps: false,
   });
 
   BlogPost.associate = (models) => {

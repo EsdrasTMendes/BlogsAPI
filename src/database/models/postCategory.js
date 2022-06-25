@@ -10,7 +10,7 @@ const PostCategorySchema = (sequelize, DataTypes) => {
       primaryKey: true,
     }
   }, {
-    timestamp: false,
+    timestamps: false,
   });
 
   PostCategoryTable.associate = (models) => {
