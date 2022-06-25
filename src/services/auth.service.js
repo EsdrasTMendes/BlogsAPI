@@ -1,23 +1,16 @@
 const { User } = require('../database/models');
 const generateJWTToken = require('../utils/JWTToken');
 
-const authentication = async ({ user, password }) => {
-if (!user || !password) {
-  throw new Error({ status: 401, message: 'User e password são obrigatórios' });
-  }
-  const verifyUser = await User.findOne({
-    attributes: ['id', 'displayName', 'email', 'password'], 
-    where: { user, password },
+const authentication = async ({ email, password }) => {
+  const user = await User.findOne({
+    attributes: ['id', 'displayName', 'email'],
+    where: { email, password },
   });
-
-  if (!verifyUser) {
-    throw new Error({
-      status: 401, message: 'Usuário ou senha inválido',
-    });
+  if (!user) {
+    return { status: 400, response: { message: 'Invalid fields' } };
   }
-  // Gerando o Token
-  const token = await generateJWTToken(verifyUser.dataValues);
-  return { token };
+  const token = generateJWTToken(user.dataValues);
+  return { status: 200, response: { token } }; 
 };
 
-module.exports = authentication;
+module.exports = { authentication };
