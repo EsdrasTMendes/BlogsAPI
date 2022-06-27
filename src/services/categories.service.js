@@ -6,6 +6,12 @@ const postCategory = async ({ name }) => {
   return { status: 201, response: dataValues };
 };
 
+const getAllCategories = async () => {
+  const categories = await Category.findAll();
+  return { status: 200, response: categories };
+};
+
 module.exports = {
   postCategory,
+  getAllCategories,
 };

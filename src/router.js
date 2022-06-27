@@ -14,4 +14,5 @@ routers.get('/user', validateToken, userController);
 routers.get('/user/:id', validateToken, userController);
 
 routers.post('/categories', validateToken, categoriesController);
+routers.get('/categories', validateToken, categoriesController);
 module.exports = routers;
