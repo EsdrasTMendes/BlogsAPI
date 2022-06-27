@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const generateJWTToken = require('../utils/JWTToken');
+const { generateJWTToken } = require('../utils/JWTToken');
 
 const postUser = async ({ displayName, email, password, image }) => {
   const user = await User.findOne({
@@ -16,4 +16,11 @@ const postUser = async ({ displayName, email, password, image }) => {
   return { status: 201, response: { token } }; 
 };
 
-module.exports = { postUser };
+const getAllUsers = async () => {
+const users = await User.findAll({
+  attributes: { exclude: ['password'] },
+});
+return { status: 200, response: users };
+};
+
+module.exports = { postUser, getAllUsers };
