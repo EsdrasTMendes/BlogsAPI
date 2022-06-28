@@ -11,7 +11,7 @@ const postUser = async ({ displayName, email, password, image }) => {
   }
   const newuser = await User.create({ displayName, email, password, image });
   const token = generateJWTToken({ displayName, email });
-  console.log('XABLAUUUUU', newuser);
+  console.log(newuser.dataValues);
 
   return { status: 201, response: { token } }; 
 };

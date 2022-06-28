@@ -1,5 +1,5 @@
-const PostCategorySchema = (sequelize, DataTypes) => {
-  const PostCategoryTable = sequelize.define('PostCategory',
+const PostCategory = (sequelize, DataTypes) => {
+  const PostCategory = sequelize.define('PostCategory',
   {
     postId: {
       type: DataTypes.INTEGER,
@@ -13,21 +13,21 @@ const PostCategorySchema = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-  PostCategoryTable.associate = (models) => {
+  PostCategory.associate = (models) => {
     models.BlogPost.belongsToMany(models.Category, {
       as: 'categories',
-      through: PostCategoryTable,
+      through: PostCategory,
       foreignKey: 'postId',
       otherKey: 'categoryId',
     });
     models.Category.belongsToMany(models.BlogPost, {
       as:'blogPost',
-      through: PostCategoryTable,
+      through: PostCategory,
       foreignKey: 'categoryId',
       otherKey: 'postId',
     });
   };
-  return PostCategoryTable;
+  return PostCategory;
 };
 
-module.exports = PostCategorySchema;
+module.exports = PostCategory;

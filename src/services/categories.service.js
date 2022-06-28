@@ -11,7 +11,13 @@ const getAllCategories = async () => {
   return { status: 200, response: categories };
 };
 
+const getCategoryById = async (id) => {
+  const category = await Category.findByPk(id);
+  return category;
+};  
+
 module.exports = {
   postCategory,
   getAllCategories,
+  getCategoryById,
 };
